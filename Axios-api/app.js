@@ -14,9 +14,26 @@ we will get the respoonse in json() format only ;
 let url = "https://catfact.ninja/fact";
 
 async function getFact(){
-    let res = await axios.get(url);
-    console.log(res.data.fact);
+    try {
+
+        let res = await axios.get(url);
+        return res.data.fact;
+
+    } catch (error) {
+        console.log('ERROR -',error);
+        return"NO FACT FOUND"
+    }
+    
 }
 
+
+let btn = document.querySelector('#btn');
+let para = document.querySelector('#result');
+
+btn.addEventListener('click', async () =>{
+    let fact = await getFact();
+    
+    para.innerText = fact;
+})
 
 
